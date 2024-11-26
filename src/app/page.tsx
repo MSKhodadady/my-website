@@ -32,7 +32,7 @@ import { useState } from "react";
 export default function Home() {
   return (
     <>
-      <Navbar className="h-[10vh]">
+      <Navbar className="h-[10vh] z-[100]">
         <NavbarBrand></NavbarBrand>
         <NavbarContent justify="center">
           <NavbarItem>
@@ -325,7 +325,7 @@ function ProjectCard({
 
       <div
         className={`absolute top-0 right-0 z-40 w-full ${
-          showDesc ? "min-h-full p-3 overflow-y-scroll" : "min-h-0 h-0 overflow-hidden"
+          showDesc ? "min-h-full p-3 " : "min-h-0 h-0 overflow-hidden"
         }   backdrop-blur-3xl	transition-all`}
       >
         <div className="flex justify-between">
