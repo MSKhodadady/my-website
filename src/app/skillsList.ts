@@ -1,0 +1,16 @@
+export const skills = [
+  "React-Next",
+  "Redux",
+  "Tailwind",
+  "Flutter",
+  "Javascript",
+  "Typescript",
+  "Python",
+  "Go",
+  "C#",
+  "Java",
+  "SQL",
+  "Git",
+  "OOP",
+  "Microservice",
+];
