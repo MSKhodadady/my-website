@@ -8,31 +8,32 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
+  NavbarItem
 } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import emailIcon from "./assets/email.svg";
+import favyLogo from "./assets/favy-logo.svg";
 import favyImg from "./assets/favy.png";
+import ftmLogo from "./assets/ftm.png";
 import githubIcon from "./assets/github.svg";
 import groupReserverImg from "./assets/group-reserve.png";
 import instagramIcon from "./assets/instagram.svg";
 import jaiziImg from "./assets/jaizi.png";
 import libBoocaImg from "./assets/lib-booca.png";
 import linkedinIcon from "./assets/linkedin.svg";
-import favyLogo from "./assets/favy-logo.svg";
 import myImage from "./assets/my-image.jpg";
-import { skills } from "./skillsList";
-import ftmLogo from "./assets/ftm.png";
 import phoneIcon from "./assets/phone.svg";
 import telegramIcon from "./assets/telegram.svg";
+import { skills } from "./skillsList";
 
 export default function Home() {
+
   return (
     <>
-      <Navbar className="h-[10vh]">
-        <NavbarBrand></NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <Navbar className="h-[10vh]" >
+      <NavbarBrand></NavbarBrand> 
+        <NavbarContent  justify="center">
           <NavbarItem>
             <Link color="foreground" href="#projects">
               پروژه ها
@@ -53,19 +54,21 @@ export default function Home() {
       </Navbar>
 
       <div className="min-h-[90vh] flex items-center justify-center">
-        <main className="max-w-2xl flex justify-between m-auto ">
+        <main className="max-w-2xl flex justify-between m-auto  flex-col lg:flex-row">
           <Image
             src={myImage}
             alt="my-image"
-            className="w-[15rem] h-auto rounded-lg shadow-lg"
+            className="mx-auto w-[15rem] h-auto rounded-lg shadow-lg"
           />
-          <div className="flex flex-col justify-center ms-3">
+          <div className="flex flex-col justify-center ms-3 mt-4 lg:mt-0">
             <h2 className="text-[2rem]">سلام</h2>
-            <h1 className="text-[3rem]">محمد صادق خدادادی</h1>
+            <h1 className="text-[3rem] text-center lg:text-start">
+              محمد صادق خدادادی
+            </h1>
             <h2 className="text-[1.3rem]">
               هستم. مهندس نرم افزار و دوستدار خلاقیت!
             </h2>
-            <div className="flex mt-4 gap-4">
+            <div className="flex mt-4 gap-4 justify-center lg:justify-start">
               <Button
                 variant="light"
                 className="p-2 min-h-fit min-w-fit"
@@ -115,12 +118,9 @@ export default function Home() {
       <section className="mx-8 mt-20" id="projects">
         <h1 className="text-3xl mb-8">پروژه ها</h1>
 
-        <div
-          className="grid grid-cols-4 gap-4 [&>*]:bg-red-300"
-          style={{ gridTemplateRows: "repeat(2, 15rem)" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 [&>*]:bg-red-300 auto-rows-[15rem]">
           <ProjectCard
-            className="row-span-2"
+            className="lg:row-span-2"
             alt="favy"
             src={favyImg}
             link="https://favy.ir/"
@@ -128,7 +128,7 @@ export default function Home() {
           />
 
           <ProjectCard
-            className="col-span-2"
+            className="lg:col-span-2"
             alt="lib booca"
             src={libBoocaImg}
             link="https://library.booca.ir/"
@@ -161,7 +161,7 @@ export default function Home() {
           </Card>
 
           <ProjectCard
-            className="col-span-2 "
+            className="lg:col-span-2 "
             alt="jaizi"
             src={jaiziImg}
             link="https://app.jaizi.ir/"
@@ -173,8 +173,8 @@ export default function Home() {
       <section className="px-8 py-10 mt-10 bg-black" id="skills">
         <h1 className="text-3xl mt-2 mb-8 text-white">مهارت ها</h1>
 
-        <div className="flex">
-          <div className="w-1/3 ">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:flex-row gap-4 lg:gap-0">
+          <div>
             <h2 className="text-xl text-white mb-3">مهارت های کلی</h2>
 
             <Chip
@@ -203,7 +203,7 @@ export default function Home() {
             </Chip>
           </div>
 
-          <div className="w-1/3">
+          <div>
             <h2 className="text-xl text-white mb-3">لیست مهارت ها</h2>
             {skills.map((i, index) => (
               <Chip
@@ -218,7 +218,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="w-1/3">
+          <div>
             <h2 className="text-xl text-white mb-3">رزومه</h2>
 
             <div className="flex">
@@ -258,11 +258,16 @@ export default function Home() {
           style={{ gridTemplateColumns: "2rem 1fr" }}
         >
           <Image src={emailIcon} className="w-8 h-8" alt="email" />
-          <Link href={"mailto:m.s.khodadadei@gmail.com"}>
+          <Link href={"mailto:m.s.khodadadei@gmail.com"} target="_blank">
             m.s.khodadadei@gmail.com
           </Link>
           <Image src={phoneIcon} className="w-8 h-8" alt="phone" />
-          <Link dir="ltr" className="text-end" href={"tel:+989383367195"}>
+          <Link
+            dir="ltr"
+            className="text-end"
+            href={"tel:+989383367195"}
+            target="_blank"
+          >
             +98-9383367195
           </Link>
           <Image src={telegramIcon} className="w-8 h-8" alt="telegram" />
@@ -270,6 +275,7 @@ export default function Home() {
             dir="ltr"
             className="text-end"
             href={"https://t.me/m_s_khodadadei"}
+            target="_blank"
           >
             t.me/m_s_khodadadei
           </Link>
