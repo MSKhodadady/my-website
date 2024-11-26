@@ -8,7 +8,7 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem
+  NavbarItem,
 } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,15 +25,16 @@ import linkedinIcon from "./assets/linkedin.svg";
 import myImage from "./assets/my-image.jpg";
 import phoneIcon from "./assets/phone.svg";
 import telegramIcon from "./assets/telegram.svg";
+import closeIcon from "./assets/close.svg";
 import { skills } from "./skillsList";
+import { useState } from "react";
 
 export default function Home() {
-
   return (
     <>
-      <Navbar className="h-[10vh]" >
-      <NavbarBrand></NavbarBrand> 
-        <NavbarContent  justify="center">
+      <Navbar className="h-[10vh]">
+        <NavbarBrand></NavbarBrand>
+        <NavbarContent justify="center">
           <NavbarItem>
             <Link color="foreground" href="#projects">
               پروژه ها
@@ -125,6 +126,7 @@ export default function Home() {
             src={favyImg}
             link="https://favy.ir/"
             title="فیوی"
+            desc="جایی برای به اشتراک گذاشتن علایق با دوستانتان 😉"
           />
 
           <ProjectCard
@@ -133,32 +135,23 @@ export default function Home() {
             src={libBoocaImg}
             link="https://library.booca.ir/"
             title="بوکا"
+            desc="این سایت برای استارت آپ اسکیدمی طراحی شده و هدف آن، فروش و مطالعه آنلاین کتاب می باشد، مانند پلتفرم های طاقچه، فیدیبو و ..."
           />
           <ProjectCard
             alt="group reserver"
             src={groupReserverImg}
             link="https://r.m-aqsa.ir/"
-            title="سامانه رزرو گروهی"
+            title="رزرو گروهی"
+            desc="این سایت برای مجموعه اردوئی اقصی تهیه شده و امکان رزرو گروهی برای زمان ها و خدمات مختلف را برای مجموعه ها فراهم می کند."
           />
 
-          <Card isFooterBlurred radius="md" className={`border-none `}>
-            <Image
-              alt={"ftm"}
-              className={`object-contain object-top h-3/4 `}
-              src={ftmLogo}
+          <ProjectCard
+            alt="ftm"
+            link="https://github.com/MSKhodadady/ftm_flutter"
+            title="FTM"
+            src={ftmLogo}
+            desc="این اپ، قابلیت مدیریت فایل ها را با تگ و بدون پوشه بندی های تو در تو و گیج کننده فراهم می کند. این اپ ویندوز، اندروید و لینوکس قابل استفاده است."
             />
-            <CardFooter className="justify-between bottom-0 gap-1 rounded-none py-1 absolute   shadow-small  z-10">
-              <Link href={""}>
-                <Button variant="light" className="text-lg font-bold">
-                  FTM{" "}
-                  <span className="italic text-sm font-normal">
-                    - مدیریت فایل با تگ
-                  </span>
-                </Button>
-              </Link>
-              <Button color="primary">توضیحات</Button>
-            </CardFooter>
-          </Card>
 
           <ProjectCard
             className="lg:col-span-2 "
@@ -166,6 +159,7 @@ export default function Home() {
             src={jaiziImg}
             link="https://app.jaizi.ir/"
             title="جایزی"
+            desc="این وبسایت متعلق به مجموعه جایزی می باشد و تغییرات و بهبودهای زیادی توسط اینجانب روی آن صورت گرفته است."
           />
         </div>
       </section>
@@ -178,7 +172,7 @@ export default function Home() {
             <h2 className="text-xl text-white mb-3">مهارت های کلی</h2>
 
             <Chip
-              className="mb-2 p-4 py-6 text-2xl"
+              className="mb-2 p-4 py-6 text-xl"
               color="warning"
               size="lg"
               variant="shadow"
@@ -186,7 +180,7 @@ export default function Home() {
               طراحی و برنامه نویسی سایت
             </Chip>
             <Chip
-              className="mb-2 p-4 py-6 text-2xl"
+              className="mb-2 p-4 py-6 text-xl"
               color="warning"
               size="lg"
               variant="shadow"
@@ -194,7 +188,7 @@ export default function Home() {
               برنامه نویسی موبایل
             </Chip>
             <Chip
-              className="mb-2 p-4 py-6 text-2xl"
+              className="mb-2 p-4 py-6 text-xl"
               color="warning"
               size="lg"
               variant="shadow"
@@ -292,6 +286,7 @@ function ProjectCard({
   src,
   link,
   title,
+  desc,
 }: {
   title: string;
   className?: string;
@@ -299,7 +294,11 @@ function ProjectCard({
   alt: string;
   src: any;
   link: string;
+
+  desc: string;
 }) {
+  const [showDesc, setShowDesc] = useState(false);
+
   return (
     <Card
       isFooterBlurred
@@ -308,17 +307,41 @@ function ProjectCard({
     >
       <Image
         alt={alt}
-        className={`object-cover object-top ${imgClassName ?? ""}`}
+        className={`object-cover h-full  object-top ${imgClassName ?? ""}`}
         src={src}
       />
-      <CardFooter className="justify-between bottom-0 gap-1 rounded-none py-1 absolute   shadow-small  z-10">
-        <Link href={link}>
+      {/* footer */}
+      <CardFooter className="absolute z-10 bottom-0 py-1  justify-between  gap-1 rounded-none    shadow-small ">
+        <Link href={link} target="_blank">
           <Button variant="light" className="text-lg font-bold">
             {title}
           </Button>
         </Link>
-        <Button color="primary">توضیحات</Button>
+        <Button color="primary" onClick={() => setShowDesc(true)}>
+          توضیحات
+        </Button>
       </CardFooter>
+      {/* desc */}
+
+      <div
+        className={`absolute top-0 right-0 z-40 w-full ${
+          showDesc ? "min-h-full p-3 overflow-y-scroll" : "min-h-0 h-0 overflow-hidden"
+        }   backdrop-blur-3xl	transition-all`}
+      >
+        <div className="flex justify-between">
+          <span className="text-lg font-bold">{title}</span>
+
+          <Button
+            variant="light"
+            className="min-w-fit w-fit p-3"
+            onClick={() => setShowDesc(false)}
+          >
+            <Image alt="close" src={closeIcon} className="w-6 h-6" />
+          </Button>
+        </div>
+
+        <div className="w-full h-full mt-2">{desc}</div>
+      </div>
     </Card>
   );
 }
